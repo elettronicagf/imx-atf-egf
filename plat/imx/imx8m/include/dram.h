@@ -29,12 +29,12 @@
 #define MAX_FSP_NUM		U(3)
 
 /* reg & config param */
-struct dram_cfg_param {
+struct __attribute__((__packed__)) dram_cfg_param {
 	unsigned int reg;
 	unsigned int val;
 };
 
-struct dram_timing_info {
+struct __attribute__((__packed__)) dram_timing_info {
 	/* umctl2 config */
 	struct dram_cfg_param *ddrc_cfg;
 	unsigned int ddrc_cfg_num;
