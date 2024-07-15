@@ -69,10 +69,12 @@ static const struct imx_rdc_cfg rdc[] = {
 	/* Master domain assignment */
 	RDC_MDAn(RDC_MDA_M4, DID1),
 
+#if 0
 	/* peripherals domain permission */
 	RDC_PDAPn(RDC_PDAP_UART4, D1R | D1W),
 	RDC_PDAPn(RDC_PDAP_UART2, D0R | D0W),
 	RDC_PDAPn(RDC_PDAP_UART1, D0R | D0W),
+#endif 
 
 	/* memory region */
 
@@ -115,12 +117,13 @@ static const struct imx_csu_cfg csu_cfg[] = {
 static const struct imx_rdc_cfg rdc[] = {
 	/* Master domain assignment */
 	RDC_MDAn(RDC_MDA_M4, DID1),
-
+	
+#if 0
 	/* peripherals domain permission */
 	RDC_PDAPn(RDC_PDAP_UART4, D1R | D1W),
 	RDC_PDAPn(RDC_PDAP_UART2, D0R | D0W),
 	RDC_PDAPn(RDC_PDAP_UART1, D0R | D0W),
-
+#endif 
 	/* memory region */
 
 	/* Sentinel */
@@ -190,8 +193,10 @@ static void bl31_tzc380_setup(void)
 void bl31_early_platform_setup2(u_register_t arg0, u_register_t arg1,
 		u_register_t arg2, u_register_t arg3)
 {
+#if 0
 	unsigned int console_base = IMX_BOOT_UART_BASE;
 	static console_t console;
+#endif
 	int i;
 
 	/* Enable CSU NS access permission */
@@ -205,14 +210,16 @@ void bl31_early_platform_setup2(u_register_t arg0, u_register_t arg1,
 
 	imx_csu_init(csu_cfg);
 
+#if 0
 	if (console_base == 0U) {
 		console_base = imx8m_uart_get_base();
 	}
-
+	
 	console_imx_uart_register(console_base, IMX_BOOT_UART_CLK_IN_HZ,
 		IMX_CONSOLE_BAUDRATE, &console);
 	/* This console is only used for boot stage */
 	console_set_scope(&console, CONSOLE_FLAG_BOOT);
+#endif
 
 	imx8m_caam_init();
 
