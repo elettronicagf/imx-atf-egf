@@ -25,18 +25,19 @@
         mmio_read_32(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + ddrphy_addr_remap(addr))
 
 /* reg & config param */
-struct dram_cfg_param {
+struct __attribute__((__packed__)) dram_cfg_param {
 	unsigned int reg;
 	unsigned int val;
 };
 
-struct dram_fsp_cfg{
+struct __attribute__((__packed__)) dram_fsp_cfg{
         struct dram_cfg_param ddrc_cfg[20];
         struct dram_cfg_param mr_cfg[10];
 	unsigned int bypass;
 };
 
-struct dram_timing_info {
+struct __attribute__((__packed__)) dram_timing_info {
+	uint64_t total_size;
 	/* umctl2 config */
 	struct dram_cfg_param *ddrc_cfg;
 	unsigned int ddrc_cfg_num;
